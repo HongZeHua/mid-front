@@ -10,5 +10,17 @@ export default defineConfig({
     alias: {
       '@': join(__dirname, '/src')
     }
+  },
+  //代理
+  server: {
+    proxy: {
+      //代理所有/api的请求，该请求将代理到target中
+      '/api': {
+        //代理请求之后的请求地址
+        target: 'https://api.imooc-front.lgdsunday.club/',
+        //跨域
+        changeOrigin: true
+      }
+    }
   }
 })
