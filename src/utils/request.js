@@ -9,4 +9,14 @@ service.interceptors.request.use((config) => {
   config.headers.icode = '7AAB5FE1E9E9F400'
   return config
 })
+//响应拦截器
+service.interceptors.response.use((response) => {
+  const { success, message, data } = response.data
+  if (success) {
+    return data
+  } else {
+    //TODO:业务错误
+    return Promise.reject(new Error(message))
+  }
+})
 export default service
