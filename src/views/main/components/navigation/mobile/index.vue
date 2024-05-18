@@ -43,7 +43,7 @@ defineProps({
 //滑块
 const sliderStyle = ref({
   transform: 'translateX(0px)',
-  width: '60px'
+  width: '50px'
 })
 
 //选中 item 下标
