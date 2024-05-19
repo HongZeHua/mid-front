@@ -41,7 +41,7 @@ const isVisable = useVModel(props)
 //锁定滚动
 const isLocked = useScrollLock(document.body)
 watch(
-  () => props.modelValue,
+  isVisable,
   (val) => {
     isLocked.value = val
   },
