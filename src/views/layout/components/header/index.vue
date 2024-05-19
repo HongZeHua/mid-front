@@ -13,7 +13,7 @@
   </div>
 </template>
 <script setup>
-import headerSearchVue from './header-search.vue'
+import headerSearchVue from './header-search/index.vue'
 import headerThemeVue from './header-theme.vue'
 import headerMyVue from './header-my.vue'
 import { useRouter } from 'vue-router'
