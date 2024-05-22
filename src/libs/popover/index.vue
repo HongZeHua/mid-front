@@ -33,6 +33,8 @@ const placementEnum = [
   PROP_BOTTOM_LEFT,
   PROP_BOTTOM_RIGHT
 ]
+//延迟关闭时长
+const DELAY_TIME = 100
 </script>
 <script setup>
 /**
@@ -61,17 +63,27 @@ const props = defineProps({
   }
 })
 const isVisable = ref(false)
+
+let timeout
 /**
  * 鼠标移入触发
  */
 const onMouseenter = () => {
   isVisable.value = true
+  //再次触发时，清理延时装置
+  if (timeout) {
+    clearTimeout(timeout)
+  }
 }
 /**
  * 鼠标移出触发
  */
 const onMouseleave = () => {
-  isVisable.value = false
+  //延时装置
+  timeout = setTimeout(() => {
+    isVisable.value = false
+    timeout = null
+  }, DELAY_TIME)
 }
 /**
  * 计算元素尺寸
