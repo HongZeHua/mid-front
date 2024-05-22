@@ -50,7 +50,7 @@ const props = defineProps({
   //控制气泡弹出位置，并给出开发者错误的提示
   placement: {
     type: String,
-    default: PROP_TOP_LEFT,
+    default: PROP_BOTTOM_LEFT,
     validator(val) {
       const result = placementEnum.includes(val)
       if (!result) {
