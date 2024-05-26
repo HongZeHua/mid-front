@@ -99,6 +99,7 @@ const useContainerWidth = () => {
     containerTarget.value.clientWidth -
     parseFloat(paddingLeft) -
     parseFloat(paddingRight)
+  console.log(containerWidth.value)
 }
 
 // 列宽
@@ -246,4 +247,31 @@ const increasingHeight = (index) => {
   columnHeightObj.value[minHeightColumn] +=
     itemHeights[index] + props.rowSpacing
 }
+
+/**
+ * 监听列数变化，重新构建瀑布流
+ */
+const reset = () => {
+  //延迟 100 毫秒，否则会导致宽度计算不正确
+  setTimeout(() => {
+    //重新计算列宽
+    useColumnWidth()
+    //重置所有的定位数据，因为data中进行了深度监听，所以该操作会触发data的watch
+    props.data.forEach((item) => {
+      item._style = null
+    })
+  }, 100)
+}
+
+/**
+ * 监听列数变化
+ */
+watch(
+  () => props.column,
+  () => {
+    //在picturePreReading 为 true 的前提下，需要首先将列滞空，列宽滞空之后，会取消瀑布流渲染
+    columnWidth.value = 0
+    reset()
+  }
+)
 </script>
