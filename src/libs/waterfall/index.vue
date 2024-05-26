@@ -99,7 +99,6 @@ const useContainerWidth = () => {
     containerTarget.value.clientWidth -
     parseFloat(paddingLeft) -
     parseFloat(paddingRight)
-  console.log(containerWidth.value)
 }
 
 // 列宽
@@ -260,7 +259,7 @@ const reset = () => {
     props.data.forEach((item) => {
       item._style = null
     })
-  }, 100)
+  }, 200)
 }
 
 /**
@@ -269,9 +268,13 @@ const reset = () => {
 watch(
   () => props.column,
   () => {
-    //在picturePreReading 为 true 的前提下，需要首先将列滞空，列宽滞空之后，会取消瀑布流渲染
-    columnWidth.value = 0
-    reset()
+    if (props.picturePreReading) {
+      //在picturePreReading 为 true 的前提下，需要首先将列滞空，列宽滞空之后，会取消瀑布流渲染
+      columnWidth.value = 0
+      reset()
+    } else {
+      reset()
+    }
   }
 )
 </script>
