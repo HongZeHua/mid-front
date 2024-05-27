@@ -39,17 +39,13 @@ const loading = useVModel(props)
 
 //滚动的元素
 const loadingTarget = ref(null)
-useIntersectionObserver(
-  loadingTarget,
-  ([{ isIntersecting }], observerElement) => {
-    //当加载更多的视图可见时，加载更多数据
-    if (isIntersecting && !loading.value && !props.isFinised) {
-      console.log('onLoad')
-      //修改加载数据标记
-      loading.value = true
-      //触发加载更多行为
-      emits('onLoad')
-    }
+useIntersectionObserver(loadingTarget, ([{ isIntersecting }]) => {
+  //当加载更多的视图可见时，同时 loading 为 false, 同时，数据尚为全部加载完，则处理加载加载更多数据的逻辑
+  if (isIntersecting && !loading.value && !props.isFinised) {
+    //修改加载数据标记
+    loading.value = true
+    //触发加载更多行为
+    emits('onLoad')
   }
-)
+})
 </script>
