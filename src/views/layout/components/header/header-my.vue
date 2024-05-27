@@ -5,7 +5,11 @@
         class="relative flex items-center p-0.5 rounded-sm cursor-pointer duration-200 outline-none hover:bg-zinc-100 dark:hover:bg-zinc-900"
       >
         <!-- 头像 -->
-        <img class="w-3 h-3 rounded-sm" src="@/assets/images/profile.jpg" />
+        <img
+          v-lazy
+          class="w-3 h-3 rounded-sm"
+          src="@/assets/images/profile.jpg"
+        />
         <!-- 下箭头 -->
         <m-svg-icon
           class="h-1.5 w-1.5 ml-0.5"
