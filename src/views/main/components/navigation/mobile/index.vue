@@ -22,9 +22,11 @@
         v-for="(item, index) in $store.getters.categorys"
         :key="item.id"
         class="shrink-0 px-1.5 py-0.5 z-10 duration-200 last:mr-4"
-        :class="{ 'text-zinc-100': currentCategoryIndex === index }"
+        :class="{
+          'text-zinc-100': $store.getters.currentCategoryIndex === index
+        }"
         :ref="setItemRef"
-        @click="onItemClick(index)"
+        @click="onItemClick(item)"
       >
         {{ item.name }}
       </li>
@@ -38,15 +40,14 @@
 import { onBeforeUpdate, ref, watch } from 'vue'
 import { useScroll } from '@vueuse/core'
 import MenuVue from '@/views/main/components/menu/index.vue'
+import { useStore } from 'vuex'
+const store = useStore()
 
 //滑块
 const sliderStyle = ref({
   transform: 'translateX(0px)',
   width: '50px'
 })
-
-//选中 item 下标
-const currentCategoryIndex = ref(0)
 
 //获取所有的item元素
 let itemRefs = []
@@ -68,20 +69,23 @@ const ulTarget = ref(null)
 const { x: ulScrollLeft } = useScroll(ulTarget)
 
 //watch 监听
-watch(currentCategoryIndex, (val) => {
-  //选中元素的left、width
-  const { left, width } = itemRefs[val].getBoundingClientRect()
-  //为sliderStyle 设置属性
-  sliderStyle.value = {
-    //滑块的位置= ul横向滚动的位置 + 当前元素的 left  - ul 的padding
-    transform: `translateX(${ulScrollLeft.value + left - 10}px)`,
-    width: width + 'px'
+watch(
+  () => store.getters.currentCategoryIndex,
+  (val) => {
+    //选中元素的left、width
+    const { left, width } = itemRefs[val].getBoundingClientRect()
+    //为sliderStyle 设置属性
+    sliderStyle.value = {
+      //滑块的位置= ul横向滚动的位置 + 当前元素的 left  - ul 的padding
+      transform: `translateX(${ulScrollLeft.value + left - 10}px)`,
+      width: width + 'px'
+    }
   }
-})
+)
 
 //item 点击事件
-const onItemClick = (index) => {
-  currentCategoryIndex.value = index
+const onItemClick = (item) => {
+  store.commit('app/changeCurrentCategory', item)
   isVisable.value = false
 }
 //控制 popup展示
