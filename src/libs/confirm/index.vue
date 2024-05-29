@@ -64,7 +64,7 @@ const props = defineProps({
     type: Function
   },
   //确定按钮事件
-  confirmHanlder: {
+  confirmHandler: {
     type: Function
   },
   //关闭 confirm 的回调
@@ -102,8 +102,8 @@ const onCancelClick = () => {
  * 确定按钮点击事件
  */
 const onConfirmClick = () => {
-  if (props.confirmHanlder) {
-    props.confirmHanlder()
+  if (props.confirmHandler) {
+    props.confirmHandler()
   }
   close()
 }
