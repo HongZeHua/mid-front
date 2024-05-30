@@ -34,6 +34,8 @@ const onSearchHandler = (val) => {
   inputValue.value = val
   if (val) {
     store.commit('search/addHistory', val)
+    //触发searchText 变化
+    store.commit('app/changeSearchText', val)
   }
 }
 </script>

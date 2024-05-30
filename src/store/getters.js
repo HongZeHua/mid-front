@@ -8,6 +8,10 @@ export default {
    */
   currentCategory: (state) => state.app.currentCategory,
   /**
+   * 搜索文本
+   */
+  searchText: (state) => state.app.searchText,
+  /**
    * category选中项下标
    */
   currentCategoryIndex: (state, getters) => {
