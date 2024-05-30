@@ -87,6 +87,8 @@ const styles = {
 }
 //控制显示处理
 const isVisable = ref(false)
+// 关闭动画执行时间
+const animDuration = '0.5s'
 /**
  * 保证动画展示，在mounted之后进行展示
  */
@@ -97,6 +99,11 @@ onMounted(() => {
    */
   setTimeout(() => {
     isVisable.value = false
+    setTimeout(() => {
+      if (props.destroy) {
+        destroy()
+      }
+    }, parseInt(animDuration.replace('0.', '').replace('s', '')) * 100)
   }, props.duration)
 })
 </script>
@@ -104,7 +111,7 @@ onMounted(() => {
 /*  down 展示动画  */
 .down-enter-active,
 .down-leave-active {
-  transition: all 0.5s;
+  transition: all v-bind(animDuration);
 }
 .down-enter-from,
 .down-leave-to {
