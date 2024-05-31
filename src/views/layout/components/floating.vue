@@ -2,7 +2,8 @@
   <div class="fixed bottom-10 right-2">
     <!-- 引导页 -->
     <div
-      class="w-4 h-4 mb-1 bg-white dark:bg-zinc-900 border dark:border-0 border-zinc-200 rounded-full flex justify-center items-center cursor-pointer duration-200 group hover:shadow-lg"
+      class="guide-start w-4 h-4 mb-1 bg-white dark:bg-zinc-900 border dark:border-0 border-zinc-200 rounded-full flex justify-center items-center cursor-pointer duration-200 group hover:shadow-lg"
+      @click="onGuideClick"
     >
       <m-svg-icon
         name="guide"
@@ -14,7 +15,7 @@
     <m-popover class="flex items-center" placement="top-left">
       <template #reference>
         <div
-          class="w-4 h-4 mb-1 bg-white dark:bg-zinc-900 border dark:border-0 border-zinc-200 rounded-full flex justify-center items-center cursor-pointer duration-200 group hover:shadow-lg"
+          class="guide-feedback w-4 h-4 mb-1 bg-white dark:bg-zinc-900 border dark:border-0 border-zinc-200 rounded-full flex justify-center items-center cursor-pointer duration-200 group hover:shadow-lg"
         >
           <m-svg-icon
             name="feedback"
@@ -38,4 +39,28 @@
     </m-popover>
   </div>
 </template>
-<script setup></script>
+<script setup>
+import { onMounted } from 'vue'
+//1.导入
+import { driver } from 'driver.js'
+import 'driver.js/dist/driver.css'
+import steps from './steps'
+
+//2.初始化
+let driverObj = null
+onMounted(() => {
+  driverObj = driver({
+    // 禁止点击蒙版关闭
+    allowClose: false,
+    doneBtnText: '关闭',
+    nextBtnText: '下一个',
+    prevBtnText: '上一个',
+    showProgress: true,
+    steps
+  })
+})
+
+const onGuideClick = () => {
+  driverObj.drive()
+}
+</script>
