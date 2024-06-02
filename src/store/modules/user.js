@@ -55,6 +55,17 @@ export default {
         }`,
         5000
       )
+    },
+    /**
+     * 退出登录
+     */
+    logout(context) {
+      //清空 token
+      context.commit('setToken', '')
+      //清空用户信息
+      context.commit('setUserInfo', {})
+      //退出登录后，需重新刷新页面，因为对于前台项目而言，用户是否登录看到的数据可能不同
+      location.reload()
     }
   }
 }
