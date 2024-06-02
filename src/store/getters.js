@@ -22,5 +22,9 @@ export default {
   /**
    * 搜索历史
    */
-  historys: (state) => state.search.historys
+  historys: (state) => state.search.historys,
+  /**
+   * 登录token
+   */
+  token: (state) => state.user.token
 }
