@@ -37,3 +37,13 @@ export const getProfile = () => {
     url: '/user/profile'
   })
 }
+/**
+ * 修改用户信息
+ */
+export const putpRofile = (data) => {
+  return request({
+    url: '/user/profile',
+    method: 'PUT',
+    data
+  })
+}

@@ -63,7 +63,8 @@
             >用户名</span
           >
           <m-input
-            v-model="$store.getters.userInfo.nickname"
+            :modelValue="$store.getters.userInfo.nickname"
+            @update:modelValue="changeStoreUserInfo('nickname', $event)"
             class="w-full"
             type="text"
             max="20"
@@ -75,7 +76,8 @@
             >职位</span
           >
           <m-input
-            v-model="$store.getters.userInfo.title"
+            :modelValue="$store.getters.userInfo.title"
+            @update:modelValue="changeStoreUserInfo('title', $event)"
             class="w-full"
             type="text"
           ></m-input>
@@ -86,7 +88,8 @@
             >公司</span
           >
           <m-input
-            v-model="$store.getters.userInfo.company"
+            :modelValue="$store.getters.userInfo.company"
+            @update:modelValue="changeStoreUserInfo('company', $event)"
             class="w-full"
             type="text"
           ></m-input>
@@ -97,7 +100,8 @@
             >个人主页</span
           >
           <m-input
-            v-model="$store.getters.userInfo.homePage"
+            :modelValue="$store.getters.userInfo.homePage"
+            @update:modelValue="changeStoreUserInfo('homePage', $event)"
             class="w-full"
             type="text"
           ></m-input>
@@ -108,9 +112,10 @@
             >个人介绍</span
           >
           <m-input
-            v-model="$store.getters.userInfo.introduction"
+            :modelValue="$store.getters.userInfo.introduction"
+            @update:modelValue="changeStoreUserInfo('introduction', $event)"
             class="w-full"
-            type="text"
+            type="textarea"
             max="50"
           ></m-input>
         </div>
@@ -118,6 +123,8 @@
         <m-button
           class="w-full mt-2 mb-4 dark:text-zinc-300 dark:bg-zinc-800 xl:w-[160px] xl:ml-[50%] xl:translate-x-[-50%]"
           :isActiveAnim="false"
+          :loading="loading"
+          @click="onChangeProfile"
           >保存修改</m-button
         >
         <!-- 移动端退出登录 -->
@@ -138,6 +145,8 @@ import { confirm } from '@/libs'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
+import { putpRofile } from '@/api/sys.js'
+import { message } from '@/libs'
 const router = useRouter()
 const store = useStore()
 /**
@@ -161,5 +170,24 @@ const inputFileTarget = ref(null)
  */
 const onSelectImgHandler = () => {
   inputFileTarget.value.click()
+}
+/**
+ * 数据本地的双向同步
+ */
+const changeStoreUserInfo = (key, value) => {
+  store.commit('user/setUserInfo', {
+    ...store.getters.userInfo,
+    [key]: value
+  })
+}
+/**
+ * 修改个人信息
+ */
+const loading = ref(false)
+const onChangeProfile = async () => {
+  loading.value = true
+  await putpRofile(store.getters.userInfo)
+  message('success', '用户信息修改成功')
+  loading.value = false
 }
 </script>
