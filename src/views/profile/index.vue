@@ -135,7 +135,11 @@
       </div>
     </div>
     <!-- PC 端 -->
-    <m-dialog v-if="!isMobileTerminal" title="标题" v-model="isDialogVisible">
+    <m-dialog
+      v-if="!isMobileTerminal"
+      title="裁剪头像"
+      v-model="isDialogVisible"
+    >
       <change-avatar-Vue
         :blob="currentBolb"
         @close="isDialogVisible = false"
