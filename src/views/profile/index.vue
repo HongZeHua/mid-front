@@ -46,18 +46,18 @@
                 点击更换头像
               </div>
             </div>
-            <!-- 隐藏域 -->
-            <input
-              v-show="false"
-              ref="inputFileTarget"
-              type="file"
-              accept=".png, .jpeg, .jpg, .gif"
-              @change="onSelectImgHandler"
-            />
-            <p class="mt-1 text-zinc-500 dark:text-zinc-400 text-xs xl:w-10">
-              支持 jpg、png、jpeg 格式大小 5M 以内的图片
-            </p>
           </div>
+          <!-- 隐藏域 -->
+          <input
+            v-show="false"
+            ref="inputFileTarget"
+            type="file"
+            accept=".png, .jpeg, .jpg, .gif"
+            @change="onSelectImgHandler"
+          />
+          <p class="mt-1 text-zinc-500 dark:text-zinc-400 text-xs xl:w-10">
+            支持 jpg、png、jpeg 格式大小 5M 以内的图片
+          </p>
         </div>
         <!-- 信息输入区域 -->
         <!-- 用户名 -->
@@ -134,16 +134,36 @@
         </m-button>
       </div>
     </div>
+    <!-- PC 端 -->
+    <m-dialog v-if="!isMobileTerminal" title="标题" v-model="isDialogVisible">
+      <change-avatar-Vue
+        :blob="currentBolb"
+        @close="isDialogVisible = false"
+      ></change-avatar-Vue>
+    </m-dialog>
+    <!-- 移动端：在展示时指定高度 -->
+    <m-popup
+      v-else
+      :class="{ 'h-screen': isDialogVisible }"
+      v-model="isDialogVisible"
+    >
+      <change-avatar-Vue
+        :blob="currentBolb"
+        @close="isDialogVisible = false"
+      ></change-avatar-Vue>
+    </m-popup>
   </div>
 </template>
 <script setup>
 import { isMobileTerminal } from '@/utils/flexible.js'
 import { confirm } from '@/libs'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { putpRofile } from '@/api/sys.js'
 import { message } from '@/libs'
+import changeAvatarVue from './components/change-avatar.vue'
+
 const router = useRouter()
 const store = useStore()
 /**
@@ -160,19 +180,41 @@ const onLogoutClick = () => {
     store.dispatch('user/logout')
   })
 }
+
+//隐藏域
+const inputFileTarget = ref(null)
 /**
  * 选择头像
  */
-const inputFileTarget = ref(null)
 const onAvatarClick = () => {
   inputFileTarget.value.click()
 }
+// 控制 dialog 展示
+const isDialogVisible = ref(false)
+//选中的图片
+const currentBolb = ref('')
 /**
  * 选中文件之后的回调
  */
 const onSelectImgHandler = () => {
-  console.log('-----')
+  //获取选中的文件
+  const imgFile = inputFileTarget.value.files[0]
+  //生成blob 对象
+  const blob = URL.createObjectURL(imgFile)
+  //获取选中的图片
+  currentBolb.value = blob
+  //展示 Dialog
+  isDialogVisible.value = true
 }
+/**
+ * 监听 dialog 关闭
+ */
+watch(isDialogVisible, (val) => {
+  if (!val) {
+    //防止 change 不重复关闭
+    inputFileTarget.value.value = null
+  }
+})
 /**
  * 数据本地的双向同步
  */
