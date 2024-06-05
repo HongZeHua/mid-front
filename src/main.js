@@ -9,6 +9,7 @@ import mDirectives from './directives'
 import 'virtual:svg-icons-register'
 import { useREM } from './utils/flexible'
 import useTheme from './utils/theme'
+import './permission.js'
 useREM()
 //初始化主题
 useTheme()
