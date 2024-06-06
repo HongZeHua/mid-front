@@ -248,5 +248,4 @@ const onChangeProfile = async () => {
   store.commit('user/setUserInfo', userInfo.value)
   loading.value = false
 }
-console.log('profile组件被渲染')
 </script>
