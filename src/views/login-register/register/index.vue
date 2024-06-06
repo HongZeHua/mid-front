@@ -83,6 +83,11 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  name: 'register'
+}
+</script>
 
 <script setup>
 import headerVue from '../components/header.vue'

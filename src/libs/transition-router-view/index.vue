@@ -5,10 +5,11 @@
       @before-enter="beforeEnter"
       @after-leave="afterLeave"
     >
-      <keep-alive>
+      <keep-alive :includes="virtualTaskStack">
         <component
           :is="Component"
           :class="{ 'fixed top-0 left-0 w-screen z-50': isAnimation }"
+          :key="$router.fullPath"
         />
       </keep-alive>
     </transition>
@@ -60,6 +61,18 @@ const transitionName = ref('')
 router.beforeEach((to, from) => {
   // 定义当前动画名称
   transitionName.value = props.routerType
+
+  if (props.routerType === ROUTER_TYPE_PUSH) {
+    //入栈
+    virtualTaskStack.value.push(to.name)
+  } else if (props.routerType === ROUTER_TYPE_BACK) {
+    //出栈
+    virtualTaskStack.value.pop()
+  }
+  //进入首页默认清空栈
+  if (to.name === props.mainComponentName) {
+    clearTask()
+  }
 })
 
 /**
@@ -71,6 +84,14 @@ const beforeEnter = () => {
 }
 const afterLeave = () => {
   isAnimation.value = false
+}
+//任务栈
+const virtualTaskStack = ref([props.mainComponentName])
+/**
+ * 清空栈
+ */
+const clearTask = () => {
+  virtualTaskStack.value = [props.mainComponentName]
 }
 </script>
 <style lang="scss" scoped>

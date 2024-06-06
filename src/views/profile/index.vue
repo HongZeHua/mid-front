@@ -158,6 +158,11 @@
     </m-popup>
   </div>
 </template>
+<script>
+export default {
+  name: 'profile'
+}
+</script>
 <script setup>
 import { isMobileTerminal } from '@/utils/flexible.js'
 import { confirm } from '@/libs'
@@ -243,4 +248,5 @@ const onChangeProfile = async () => {
   store.commit('user/setUserInfo', userInfo.value)
   loading.value = false
 }
+console.log('profile组件被渲染')
 </script>
