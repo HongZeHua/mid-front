@@ -46,7 +46,7 @@ import Cropper from 'cropperjs'
 import { getOSSClient } from '@/utils/sts'
 import { message } from '@/libs'
 import { useStore } from 'vuex'
-import { putpRofile } from '../../../api/sys'
+import { putpRofile } from '@/api/sys'
 const store = useStore()
 defineProps({
   blob: {

@@ -95,16 +95,17 @@ const { enter: onImgFullScreen } = useFullscreen(imgTarget)
 /**
  * pins 跳转处理，记录图片的中心点（X|Y位置+宽|高的一半)
  */
-const {
-  x: imgContainerX,
-  y: imgContainerY,
-  width: imgContainerWidth,
-  height: imgContainerHeight
-} = useElementBounding(imgTarget)
+
 const imgContainerCenter = computed(() => {
+  const {
+    x: imgContainerX,
+    y: imgContainerY,
+    width: imgContainerWidth,
+    height: imgContainerHeight
+  } = imgTarget.value.getBoundingClientRect()
   return {
-    translateX: parseInt(imgContainerX.value + imgContainerWidth.value / 2),
-    translateY: parseInt(imgContainerY.value + imgContainerHeight.value / 2)
+    translateX: parseInt(imgContainerX + imgContainerWidth / 2),
+    translateY: parseInt(imgContainerY + imgContainerHeight / 2)
   }
 })
 /**

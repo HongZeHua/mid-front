@@ -24,7 +24,7 @@ export default [
     name: 'profile',
     component: () => import('@/views/profile/index.vue'),
     //标记当前的页面只有用户登录之后才可以进入
-    mata: {
+    meta: {
       user: true
     }
   }

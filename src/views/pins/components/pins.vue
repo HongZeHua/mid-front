@@ -69,7 +69,9 @@ import { ref } from 'vue'
 import { getPexelsFromId } from '@/api/pexels'
 import { isMobileTerminal } from '@/utils/flexible.js'
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 const router = useRouter()
+const store = useStore()
 const props = defineProps({
   id: {
     type: String,
@@ -91,6 +93,8 @@ getPexelData()
  * 关闭按钮处理事件
  */
 const onPop = () => {
+  //移动端下跳转的类型
+  store.commit('app/changeRouterType', 'back')
   router.back()
 }
 </script>

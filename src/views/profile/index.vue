@@ -174,6 +174,8 @@ const store = useStore()
  * 移动端下navbar 左侧点击事件
  */
 const onNavbarLeftClick = () => {
+  //移动端下跳转的类型
+  store.commit('app/changeRouterType', 'back')
   router.back()
 }
 /**
