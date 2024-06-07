@@ -18,6 +18,8 @@ const QQ_LOGIN_URL =
 <script setup>
 import { onMounted } from 'vue'
 import broadcast from './broadcast'
+import { oauthLogin } from './oauth'
+import { LOGIN_TYPE_QQ } from '@/constants'
 
 /**
  * QQ 登录挂起
@@ -60,7 +62,7 @@ const onQQLogin = () => {
 /**
  * 处理 QQ 登录视窗
  */
-const openQQWindow = () => {
+const openQQWindow = async () => {
   window.open(
     QQ_LOGIN_URL,
     'oauth2Login_10609',
@@ -69,9 +71,10 @@ const openQQWindow = () => {
   broadcast.wait().then(async (oauthObj) => {
     //登录成功，关闭通知
     broadcast.clear()
-    //TODO:执行登录操作
-    console.log('TODO:执行登录操作')
+    //执行登录操作
+    console.log('执行登录操作')
     console.log(oauthObj)
+    oauthLogin(LOGIN_TYPE_QQ, oauthObj)
   })
 }
 </script>

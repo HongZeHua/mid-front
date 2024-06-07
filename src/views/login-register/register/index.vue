@@ -105,9 +105,11 @@ import {
 import { ref } from 'vue'
 import { LOGIN_TYPE_USERNAME } from '@/constants/index.js'
 import { useStore } from 'vuex'
+import { useRouter, useRoute } from 'vue-router'
+
 const store = useStore()
-import { useRouter } from 'vue-router'
 const router = useRouter()
+const route = useRoute()
 /**
  * 插入规则
  * 参数：规则的名字，规则函数
@@ -137,7 +139,7 @@ const onRegHandler = () => {
       password: regForm.value.password
     }
     //触发注册
-    store.dispatch('user/register', payload)
+    store.dispatch('user/register', { ...payload, ...route.query })
     //注册成功，触发登录
     store.dispatch('user/login', {
       ...payload,
