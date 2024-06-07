@@ -17,6 +17,7 @@ const QQ_LOGIN_URL =
 
 <script setup>
 import { onMounted } from 'vue'
+import broadcast from './broadcast'
 
 /**
  * QQ 登录挂起
@@ -43,7 +44,10 @@ onMounted(() => {
         figureurl_qq_2,
         accessToken
       }
-      console.log(oauthObj)
+      //完成跨页面传输
+      broadcast.send(oauthObj)
+      //在pc端下，关闭第三方窗口
+      window.close()
     }
   )
 })
@@ -62,5 +66,12 @@ const openQQWindow = () => {
     'oauth2Login_10609',
     'height=525,width=585, toolbar=no, menubar=no, scrollbars=no, status=no, location=yes, resizable=yes'
   )
+  broadcast.wait().then(async (oauthObj) => {
+    //登录成功，关闭通知
+    broadcast.clear()
+    //TODO:执行登录操作
+    console.log('TODO:执行登录操作')
+    console.log(oauthObj)
+  })
 }
 </script>
