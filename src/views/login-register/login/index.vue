@@ -61,7 +61,7 @@
       <!-- 第三方登录 -->
       <div class="flex justify-around mt-4">
         <!-- QQ -->
-        <m-svg-icon class="w-4 cursor-pointer" name="qq"></m-svg-icon>
+        <qq-login-vue></qq-login-vue>
         <!-- 微信 -->
         <m-svg-icon class="w-4 cursor-pointer" name="wexin"></m-svg-icon>
       </div>
@@ -95,6 +95,7 @@ import { useStore } from 'vuex'
 const store = useStore()
 import { useRouter } from 'vue-router'
 const router = useRouter()
+import qqLoginVue from './qq-login.vue'
 
 /**
  * 登录触发,表单校验通过之后触发
