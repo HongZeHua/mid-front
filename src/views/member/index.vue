@@ -18,7 +18,7 @@
           升级精选VIP，畅想所有内容
         </p>
         <div
-          class="flex justify-between mt-5 overflow-auto pb-2 scrollbar-thin scrollbar-thumb-zinc-200 dark:scrollbar-thumb-zinc-700 scrollbar-track-transparent"
+          class="flex justify-between mt-3 overflow-auto pb-1 scrollbar-thin scrollbar-thumb-zinc-200 dark:scrollbar-thumb-zinc-700 scrollbar-track-transparent"
         >
           <pay-menu-item-vue
             v-for="item in vipPayListData"
@@ -31,7 +31,7 @@
         </div>
         <p class="mt-1 text-sm text-zinc-500">{{ currentPayData.desc }}</p>
         <!-- 支付 -->
-        <m-count-down :time="1000 * 60"></m-count-down>
+        <payment-vue class="mt-3" />
       </div>
     </div>
   </div>
@@ -50,6 +50,7 @@ import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 import { getVipPayList } from '@/api/pay'
+import paymentVue from './components/payment/index.vue'
 
 /**
  * 列表数据

@@ -1,0 +1,9 @@
+<template>
+  <!-- pc端支付 -->
+  <pc-payment-vue v-if="!isMobileTerminal"></pc-payment-vue>
+  <!-- 移动端支付 -->
+</template>
+<script setup>
+import { isMobileTerminal } from '@/utils/flexible'
+import pcPaymentVue from './pc-payment/index.vue'
+</script>
