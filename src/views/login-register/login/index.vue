@@ -63,7 +63,7 @@
         <!-- QQ -->
         <qq-login-vue></qq-login-vue>
         <!-- 微信 -->
-        <m-svg-icon class="w-4 cursor-pointer" name="wexin"></m-svg-icon>
+        <weixin-login-vue></weixin-login-vue>
       </div>
     </div>
     <!-- 人类行为验证模块 -->
@@ -96,6 +96,7 @@ const store = useStore()
 import { useRouter } from 'vue-router'
 const router = useRouter()
 import qqLoginVue from './qq-login.vue'
+import weixinLoginVue from './weixin-login.vue'
 
 /**
  * 登录触发,表单校验通过之后触发
