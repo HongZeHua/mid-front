@@ -27,6 +27,7 @@
       <div clas="w-[140px] overflow-hidden">
         <div
           class="flex items-center p-1 cursor-pointer rounded hover:bg-zinc-100/60 dark:bg-zinc-800"
+          @click="onToFeedback"
         >
           <m-svg-icon
             name="feedback"
@@ -41,6 +42,8 @@
 </template>
 <script setup>
 import { onMounted } from 'vue'
+import { FEEDBACK_URL } from '@/constants'
+
 //1.导入
 import { driver } from 'driver.js'
 import 'driver.js/dist/driver.css'
@@ -62,5 +65,12 @@ onMounted(() => {
 
 const onGuideClick = () => {
   driverObj.drive()
+}
+
+/**
+ * 反馈处理
+ */
+const onToFeedback = () => {
+  window.open(FEEDBACK_URL, '_blank')
 }
 </script>
