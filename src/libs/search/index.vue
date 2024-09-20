@@ -112,7 +112,7 @@ const onClearClick = () => {
  * 触发搜索
  */
 const onSearchHandler = () => {
-  emits(EMIT_SEARCH, inputValue)
+  emits(EMIT_SEARCH, inputValue.value)
 }
 
 //input 是否获取到焦点

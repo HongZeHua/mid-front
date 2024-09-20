@@ -10,7 +10,7 @@
           >支付金额：</span
         >
         <span class="text-lg mr-[-12px]">￥</span>
-        19
+        {{ payData.price }}
       </p>
 
       <div class="flex mt-3">
@@ -37,6 +37,7 @@ const props = defineProps({
     type: Object
   }
 })
+
 const onAliPayClick = () => {
   alipay(props.payData.title, props.payData.desc)
 }

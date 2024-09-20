@@ -54,7 +54,7 @@ const sizeEnum = {
     icon: ''
   },
   'icon-small': {
-    button: 'w-3 h-3 text-base',
+    button: 'w-3 h-3 ',
     icon: 'w-1.5 h-1.5'
   }
 }

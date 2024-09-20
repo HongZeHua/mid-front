@@ -1,5 +1,4 @@
 import { computed } from 'vue'
-import { useWindowSize } from '@vueuse/core'
 
 /**
  * 判断当前是否为移动设备

@@ -10,7 +10,7 @@
         ref="contentTarget"
         v-show="isVisable"
         class="absolute p-1 z-20 bg-white dark:bg-zinc-900 border dark:border-zinc-700 rounded-md"
-        :style="contenStyle"
+        :style="contentStyle"
       >
         <!-- 匿名插槽：弹出层视图中展示的内容 -->
         <slot />
@@ -100,7 +100,7 @@ const useElementSize = (target) => {
 /**
  * 计算弹层的位置
  */
-const contenStyle = ref({
+const contentStyle = ref({
   top: 0,
   left: 0
 })
@@ -113,28 +113,28 @@ watch(isVisable, (val) => {
     switch (props.placement) {
       //左上
       case PROP_TOP_LEFT:
-        contenStyle.value.top = 0
-        contenStyle.value.left =
+        contentStyle.value.top = 0
+        contentStyle.value.left =
           -useElementSize(contentTarget.value).width + 'px'
         break
       //右上
       case PROP_TOP_RIGHT:
-        contenStyle.value.top = 0
-        contenStyle.value.left =
+        contentStyle.value.top = 0
+        contentStyle.value.left =
           useElementSize(referenceTarget.value).width + 'px'
         break
       //左下
       case PROP_BOTTOM_LEFT:
-        contenStyle.value.top =
+        contentStyle.value.top =
           useElementSize(referenceTarget.value).height + 'px'
-        contenStyle.value.left =
+        contentStyle.value.left =
           -useElementSize(contentTarget.value).width + 'px'
         break
       //右下
       case PROP_BOTTOM_RIGHT:
-        contenStyle.value.top =
+        contentStyle.value.top =
           useElementSize(referenceTarget.value).height + 'px'
-        contenStyle.value.left =
+        contentStyle.value.left =
           useElementSize(referenceTarget.value).width + 'px'
         break
     }

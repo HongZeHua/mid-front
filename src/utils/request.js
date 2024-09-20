@@ -9,7 +9,7 @@ const service = axios.create({
 service.interceptors.request.use(
   (config) => {
     //添加icode
-    config.headers.icode = '7AAB5FE1E9E9F400'
+    config.headers.icode = 'F1AFF6BD781E7ACD'
     if (store.getters.token) {
       //如果token存在 注入token
       config.headers.Authorization = `Bearer ${store.getters.token}`

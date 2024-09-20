@@ -1,6 +1,10 @@
 <template>
   <div class="w-full guide-search">
-    <m-search v-model="inputValue" @search="onSearchHandler">
+    <m-search
+      v-model="inputValue"
+      @search="onSearchHandler"
+      @clear="onSearchHandler"
+    >
       <template #dropdown>
         <div>
           <!-- 搜索提示 -->
@@ -36,6 +40,8 @@ const onSearchHandler = (val) => {
     store.commit('search/addHistory', val)
     //触发searchText 变化
     store.commit('app/changeSearchText', val)
+    console.log('触发 searchText 变化')
+    inputValue.value = ''
   }
 }
 </script>

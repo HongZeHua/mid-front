@@ -169,7 +169,7 @@ import { confirm } from '@/libs'
 import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
-import { putpRofile } from '@/api/sys.js'
+import { putProfile } from '@/api/sys.js'
 import { message } from '@/libs'
 import changeAvatarVue from './components/change-avatar.vue'
 
@@ -242,7 +242,7 @@ const userInfo = ref(store.getters.userInfo)
 const loading = ref(false)
 const onChangeProfile = async () => {
   loading.value = true
-  await putpRofile(userInfo.value)
+  await putProfile(userInfo.value)
   message('success', '用户信息修改成功')
   //更新 vuex
   store.commit('user/setUserInfo', userInfo.value)

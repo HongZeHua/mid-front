@@ -40,7 +40,7 @@ export const getProfile = () => {
 /**
  * 修改用户信息
  */
-export const putpRofile = (data) => {
+export const putProfile = (data) => {
   return request({
     url: '/user/profile',
     method: 'PUT',

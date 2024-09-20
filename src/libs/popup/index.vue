@@ -33,7 +33,7 @@ const props = defineProps({
   }
 })
 
-defineEmits(['update:modelValue'])
+const emits = defineEmits(['update:modelValue'])
 
 //是一个响应式数据，当 isVisable 值发生变化时，会自动触发 emit 修改 modelValue
 const isVisable = useVModel(props)
@@ -46,13 +46,15 @@ watch(
     isLocked.value = val
   },
   {
-    ismmediate: true
+    immediate: true
   }
 )
 </script>
 <style lang="scss" scoped>
 /*  fade 展示动画  */
-.fade-enter-active,
+.fade-enter-active {
+  transition: all 0.3s;
+}
 .fade-leave-active {
   transition: all 0.3s;
 }
@@ -67,6 +69,6 @@ watch(
 }
 .popup-down-up-enter-from,
 .popup-down-up-leave-to {
-  opacity: 0;
+  transform: translateY(100%);
 }
 </style>

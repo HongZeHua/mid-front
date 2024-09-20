@@ -46,7 +46,7 @@ import Cropper from 'cropperjs'
 import { getOSSClient } from '@/utils/sts'
 import { message } from '@/libs'
 import { useStore } from 'vuex'
-import { putpRofile } from '@/api/sys'
+import { putProfile } from '@/api/sys'
 const store = useStore()
 defineProps({
   blob: {
@@ -87,7 +87,7 @@ const onConfirmClick = () => {
   //获取裁剪后的图片
   cropper.getCroppedCanvas().toBlob((blob) => {
     //裁剪后的blob地址
-    // console.log(URL.createObjectURL(blob))
+    console.log('URL.createObjectURL(blob)=>', URL.createObjectURL(blob))
     putObjectToOSS(blob)
   })
 }
@@ -107,7 +107,7 @@ const putObjectToOSS = async (file) => {
     }`
     //参数：文件存放路径，文件
     const res = await ossClient.put(`images/${fileName}`, file)
-    console.log(res)
+    // console.log(res)
     onChangeProfile(res.url)
   } catch (error) {
     message('error', error)
@@ -123,7 +123,7 @@ const onChangeProfile = async (avatar) => {
     avatar
   })
   //更新服务器数据
-  await putpRofile(store.getters.userInfo)
+  await putProfile(store.getters.userInfo)
   //通知用户
   message('success', '用户头像修改成功')
   //关闭 loading
