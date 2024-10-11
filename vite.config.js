@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path, { join } from 'path'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import { visualizer } from 'rollup-plugin-visualizer'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,6 +13,11 @@ export default defineConfig({
       iconDirs: [path.resolve(process.cwd(), 'src/assets/icons')],
       //指定symbolId格式
       symbolId: 'icon-[name]'
+    }),
+    visualizer({
+      emitFile: false,
+      file: 'stats.html',
+      open: false
     })
   ],
   //软链接
