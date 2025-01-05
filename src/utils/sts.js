@@ -1,8 +1,8 @@
-import OSS from 'ali-oss'
 import { getSts } from '@/api/sys'
 import { REGION, BUCKET } from '@/constants'
 export const getOSSClient = async () => {
   const res = await getSts()
+  const OSS = (await import('ali-oss')).default
   return new OSS({
     //Bucket所在地域
     region: REGION,

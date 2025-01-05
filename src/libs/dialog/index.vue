@@ -87,7 +87,7 @@ const onCancelClick = () => {
   close()
 }
 /**
- * 取消按钮点击事件
+ * 按钮点击事件
  */
 const onConfirmClick = () => {
   if (props.confirmHandler) {

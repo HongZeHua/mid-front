@@ -8,6 +8,7 @@
         class="guide-home h-4 cursor-pointer mr-2"
         src="@/assets/images/logo.jpeg"
         @click="onToHome"
+        alt=""
       />
       <header-search-vue class="mr-1"></header-search-vue>
       <header-theme-vue class="mr-1"></header-theme-vue>

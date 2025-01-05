@@ -12,6 +12,7 @@
         class="w-full rounded bg-transparent"
         :src="data.photo"
         :style="{ height: (width / data.photoWidth) * data.photoHeight + 'px' }"
+        alt=""
       />
       <!-- 遮罩层 -->
       <div

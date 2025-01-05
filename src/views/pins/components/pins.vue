@@ -55,7 +55,12 @@
         </p>
         <!-- 作者 -->
         <div class="flex items-center mt-1 px-1">
-          <img v-lazy class="h-3 w-3 rounded-full" :src="pexelData.avatar" />
+          <img
+            v-lazy
+            class="h-3 w-3 rounded-full"
+            :src="pexelData.avatar"
+            alt=""
+          />
           <span class="text-base text-zinc-900 dark:text-zinc-200 ml-1">{{
             pexelData.author
           }}</span>

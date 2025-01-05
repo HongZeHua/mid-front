@@ -10,6 +10,7 @@
           v-lazy
           class="w-3 h-3 rounded-sm"
           :src="$store.getters.userInfo.avatar"
+          alt=""
         />
         <!-- 下箭头 -->
         <m-svg-icon

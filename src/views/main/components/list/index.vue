@@ -43,7 +43,7 @@ const store = useStore()
  */
 let query = {
   page: 1,
-  size: 20
+  size: 10
 }
 //数据是否在加载中
 const loading = ref(false)
